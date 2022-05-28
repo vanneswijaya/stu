@@ -1,13 +1,8 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from "./components/Home.vue";
-</script>
+<script setup></script>
 
 <template>
-  <div class="h-screen w-screen bg-primary pl-20 pt-20">
-    <div class="text-6xl font-bold">STU</div>
-    <div class="text-3xl font-thin">Forex made easy.</div>
+  <div class="">
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
