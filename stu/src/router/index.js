@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../components/Home.vue";
+import Lending from "../components/Lending.vue";
 
 const routes = [
   {
@@ -9,6 +10,15 @@ const routes = [
     meta: {
       footer: false,
       onPage: "home",
+    },
+  },
+  {
+    path: "/lending",
+    name: "Lending",
+    component: Lending,
+    meta: {
+      footer: false,
+      onPage: "lending",
     },
   },
 ];
