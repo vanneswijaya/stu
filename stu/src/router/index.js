@@ -1,6 +1,8 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../components/Home.vue";
 import Lending from "../components/Lending.vue";
+import Exchange from "../components/Exchange.vue";
+import InstantExchange from "../components/InstantExchange.vue";
 
 const routes = [
   {
@@ -21,6 +23,25 @@ const routes = [
       onPage: "lending",
     },
   },
+  {
+    path: "/exchange",
+    name: "exchange",
+    component: Exchange,
+    meta: {
+      footer: false,
+      onPage: "home",
+    },
+  },
+  {
+    path: "/instant-exchange",
+    name: "instant-exchange",
+    component: InstantExchange,
+    meta: {
+      footer: false,
+      onPage: "home",
+    },
+  }
+  
 ];
 
 const router = createRouter({

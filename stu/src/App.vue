@@ -2,7 +2,8 @@
 
 <template>
   <div class="">
-    <router-view :key="$route.fullPath" />
+    <router-view :key="$route.fullPath">
+    </router-view>
   </div>
 </template>
 

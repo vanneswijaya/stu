@@ -8,8 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "flag-icons": "^6.4.2",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.15"
+    "vue-final-modal": "^3.4.4",
+    "vue-router": "^4.0.15",
+    "vue3-country-flag-icon": "^0.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
