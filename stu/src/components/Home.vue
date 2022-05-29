@@ -200,6 +200,11 @@
           </div>
         </div>
       </div>
+      <div class="flex flex-col mt-5 gap-x-5">
+        <div class="flex justify-center rounded-3xl w-full h-16 bg-white/5 p-5">
+          See More
+        </div>
+      </div>
     </section>
   </div>
 </template>

@@ -3,6 +3,7 @@ import Home from "../components/Home.vue";
 import Lending from "../components/Lending.vue";
 import Exchange from "../components/Exchange.vue";
 import InstantExchange from "../components/InstantExchange.vue";
+import Currency from "../components/Currency.vue";
 
 const routes = [
   {
@@ -29,7 +30,7 @@ const routes = [
     component: Exchange,
     meta: {
       footer: false,
-      onPage: "home",
+      onPage: "exchange",
     },
   },
   {
@@ -38,10 +39,18 @@ const routes = [
     component: InstantExchange,
     meta: {
       footer: false,
-      onPage: "home",
+      onPage: "instant-exchange",
     },
-  }
-  
+  },
+  {
+    path: "/currency",
+    name: "currency",
+    component: Currency,
+    meta: {
+      footer: false,
+      onPage: "currency",
+    },
+  },
 ];
 
 const router = createRouter({
