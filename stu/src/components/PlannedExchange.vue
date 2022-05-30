@@ -1,8 +1,21 @@
 <script setup></script>
 <template class="">
-  <div class="h-screen w-screen bg-dark py-10 px-10">
-    <div class="text-lg text-white font-bold mb-12">Planned Exchange</div>
+  <div class="h-full w-screen bg-dark py-10 px-10">
+    <div class="text-lg text-white font-bold mb-4">Planned Exchange</div>
     <div class="h-full rounded-lg ">
+      
+      <div class="text-white mt-8">
+        Historical Price
+      </div>
+      <section class="mb-8">
+        <Line :chart-data="chartData" />
+      </section>
+
+      <button @click="convert()" class="my-4 h-16 w-1/2 bg-secondary rounded-lg text-white text-lg">
+        <span>Convert {{fromCurrency.name}}</span>
+        <span> to </span>
+        <span>{{toCurrency.name}}</span>
+      </button>
 
       <div class="text-lg mb-8">
         <p class="mb-2 text-primary">Planned Exchange Rate</p>
@@ -70,6 +83,7 @@ import { VueFinalModal, ModalsContainer } from 'vue-final-modal'
 import { ref, reactive, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { store } from '../store/store.js'
+import { Line } from "vue-chartjs";
 
 // onMounted(() => {
 //   fromCurrency.value = store.fromCurrency
@@ -100,7 +114,73 @@ watch(targetRate, (newAmount, oldAmount) => {
   amount.value = store.fromCurrency.amount * targetRate.value
 })
 
+import {
+  Chart as ChartJS,
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip,
+  SubTitle,
+} from "chart.js";
 
+ChartJS.register(
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip,
+  SubTitle
+);
+
+const chartData = ref({
+  labels: ["1", "5", "10", "15", "20", "31"],
+  datasets: [
+    {
+      label: "Exchange rate in HKD",
+      data: [3, 5, 3, 10, 25, 23],
+      backgroundColor: "rgba(34, 197, 94, 0.2)",
+      borderColor: "rgba(34, 197, 94, 1)",
+      borderWidth: 2,
+    },
+  ],
+});
 
 
 
