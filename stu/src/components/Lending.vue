@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="flex flex-col h-screen w-screen bg-dark text-white px-5 py-5 overflow-auto"
+    class="flex flex-col h-screen w-screen bg-dark text-white p-8 overflow-auto"
   >
     <section>
       <div class="text-2xl font-medium">Available Projects</div>

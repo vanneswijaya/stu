@@ -52,7 +52,7 @@
         Historical Price
       </div>
       <section class="mb-8">
-        <Line :chart-data="chartData" />
+        <Line ref="line" :chart-data="chartData" :plugins="plugins" :chart-options="chartOptions"  />
       </section>
 
       <div class="text-lg mb-8">
@@ -122,36 +122,6 @@ import { ref, reactive, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { store } from '../store/store.js'
 import { Line } from "vue-chartjs";
-
-// onMounted(() => {
-//   fromCurrency.value = store.fromCurrency
-//   toCurrency.value = store.toCurrency
-// })
-
-// var toCurrency = ref({
-//     'name':'IDR',
-//     'flag':'https://flagpedia.net/data/flags/w580/id.png',
-//     'amount': 2000
-//   })
-
-// var fromCurrency = ref({
-//     'name':'HKD',
-//     'flag':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Hong_Kong.svg/640px-Flag_of_Hong_Kong.svg.png',
-//     'amount': 1000
-//   })
-
-var fromCurrency = ref(store.fromCurrency)
-var toCurrency = ref(store.toCurrency)
-var targetRate = ref(0)
-var currentRate = ref(1.5)
-
-var amount = ref(0)
-
-watch(targetRate, (newAmount, oldAmount) => {
-  console.log(targetRate)
-  amount.value = store.fromCurrency.amount * targetRate.value
-})
-
 import {
   Chart as ChartJS,
   ArcElement,
@@ -207,12 +177,38 @@ ChartJS.register(
   SubTitle
 );
 
-const chartData = ref({
-  labels: ["1", "5", "10", "15", "20", "31"],
+
+var fromCurrency = ref(store.fromCurrency)
+var toCurrency = ref(store.toCurrency)
+var targetRate = ref(0)
+var currentRate = ref(1.5)
+var amount = ref(0)
+var line = ref(null)
+
+watch(targetRate, (newAmount, oldAmount) => {
+  console.log(targetRate)
+  amount.value = store.fromCurrency.amount * targetRate.value
+})
+
+var cValues = ref([])
+var cLabels = ref([])
+cValues.value = [5.774151530133701,5.7530817684312385,5.76544239766191,5.77905947365134,5.762625294210719,5.755027096480725,5.781878237890959,5.804666001451537,5.779695452994126,5.777380587554022,5.76389230399571,5.752723777121603,5.74136830103246,5.744742927721244,5.736929673569422,5.717232928276818,5.73450111330404,5.747613558999526,5.727620331537806,5.738017561688632,5.761193123338398,5.734151262789548,5.773417643250147,5.798124694206806,5.783868017740056,5.791095431822317,5.8139965154831685,5.8242241399338495,5.801901086706407,5.834287269126208,5.8262182460035765]
+cLabels.value = [23,24,25,26,27,28,29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
+
+
+var chartData = ref({
+  labels: cLabels,
   datasets: [
     {
       label: "Exchange rate in HKD",
-      data: [3, 5, 3, 10, 25, 23],
+      data: cValues,
+      options: {
+        "horizontalLine": [{
+          "y": 5,
+          "style": "rgba(255, 0, 0, .4)",
+          "text": "max"
+        }]
+      },
       backgroundColor: "rgba(34, 197, 94, 0.2)",
       borderColor: "rgba(34, 197, 94, 1)",
       borderWidth: 2,
@@ -220,9 +216,35 @@ const chartData = ref({
   ],
 });
 
+var plugins = ref(["horizonalLinePlugin"])
+
+var chartOptions = ref({
+    "horizontalLine": [{
+      "y": 82,
+      "style": "rgba(255, 0, 0, .4)",
+      "text": "max"
+    }, {
+      "y": 60,
+      "style": "#00ffff",
+    }, {
+      "y": 44,
+      "text": "min"
+    }]
+  })
+
+
+
+
+
 //TODO: add line in the chart and make line automatically update after changing targetRate
 //TODO: offered by what bank
 
+// {
+//   from:"HKD",
+//   from_amt:0,
+//   to:"SGD",
+//   to_amt:1000,
+// }
 
 
 
