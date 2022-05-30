@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../components/Home.vue";
 import Lending from "../components/Lending.vue";
+import LendingDetails from "../components/LendingDetails.vue";
 import Exchange from "../components/Exchange.vue";
 import InstantExchange from "../components/InstantExchange.vue";
 import PlannedExchange from "../components/PlannedExchange.vue";
@@ -24,6 +25,15 @@ const routes = [
     meta: {
       footer: false,
       onPage: "lending",
+    },
+  },
+  {
+    path: "/lending-details",
+    name: "LendingDetails",
+    component: LendingDetails,
+    meta: {
+      footer: false,
+      onPage: "lending-details",
     },
   },
   {
