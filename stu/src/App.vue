@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="">
+  <div class="bg-dark">
     <router-view :key="$route.fullPath">
     </router-view>
   </div>

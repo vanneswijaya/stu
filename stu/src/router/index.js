@@ -3,6 +3,7 @@ import Home from "../components/Home.vue";
 import Lending from "../components/Lending.vue";
 import Exchange from "../components/Exchange.vue";
 import InstantExchange from "../components/InstantExchange.vue";
+import PlannedExchange from "../components/PlannedExchange.vue";
 import Currency from "../components/Currency.vue";
 
 const routes = [
@@ -40,6 +41,15 @@ const routes = [
     meta: {
       footer: false,
       onPage: "instant-exchange",
+    },
+  },
+  {
+    path: "/planned-exchange",
+    name: "planned-exchange",
+    component: PlannedExchange,
+    meta: {
+      footer: false,
+      onPage: "planned-exchange",
     },
   },
   {
