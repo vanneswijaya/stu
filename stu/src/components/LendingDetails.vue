@@ -10,25 +10,29 @@ import { ref } from "vue";
     </div>
     <div class="px-4">
       <div id="title" class="bg-white/10 p-6 rounded-b-xl">
+        
         <div id="main-desc" class="flex justify-between">
         <div class="flex">
-          <div class="bg-green-500 h-10 w-10 rounded-l-lg rounded-tr-lg flex items-center justify-center text-dark font-bold mr-2 text-sm">
+          <div class="bg-green-500 h-8 w-8 rounded-l-lg rounded-tr-lg flex items-center justify-center text-dark font-bold mr-2 text-xs">
             8.5
           </div>
-          <div class="flex items-center justify-center text-green-500 text-sm">
+          <div class="flex items-center justify-center text-green-500 text-xs">
             Excellent
           </div>
         </div>
         <div class="flex">
-          <div class="bg-primary h-10 w-12 rounded-l-lg rounded-tr-lg flex items-center justify-center text-dark font-bold mr-2 text-sm">
+          <div class="bg-primary h-8 w-12 rounded-l-lg rounded-tr-lg flex items-center justify-center text-dark font-bold mr-2 text-xs">
             1.12%
           </div>
-          <div class="flex items-center justify-center text-primary text-sm">
+          <div class="flex items-center justify-center text-primary text-xs">
             Interest Rate
           </div>
         </div>
       </div>
-      <h1 class="text-white text-md my-4">BeatBox: A Ready to Drink Cocktail with Unique Flavors</h1>
+      <div class="my-4">
+        <h1 class="text-white text-md mb-2 font-bold leading-tight">BeatBox: A Ready to Drink Cocktail with Unique Flavors</h1>
+        
+      </div>
       <div id="desc" class="flex justify-between rounded-lg">
         <div class="flex">
           <img class="w-10 h-10 rounded mr-2 " src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Default avatar">
@@ -45,7 +49,15 @@ import { ref } from "vue";
           <svg class="w-8 h-8 text-white border-0 p-1.5 rounded-lg" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M511.1 63.1v287.1c0 35.25-28.75 63.1-64 63.1h-144l-124.9 93.68c-7.875 5.75-19.12 .0497-19.12-9.7v-83.98h-96c-35.25 0-64-28.75-64-63.1V63.1c0-35.25 28.75-63.1 64-63.1h384C483.2 0 511.1 28.75 511.1 63.1z"/></svg>
         </div>
       </div>
-      <hr class="my-6 opacity-50">
+      <hr class="mt-4 mb-2 opacity-50">
+      <div class="flex justify-between">
+          <div class="text-xs text-gray-200 mb-1 leading-tight tracking-tight">
+            <span>Min. Lend ></span><span class="text-tertiary"> HKD $1,000</span>
+          </div>
+          <div class="text-xs text-gray-200 mb-1 leading-tight tracking-tight">
+            <span>Duration ></span><span class="text-tertiary"> 6 months</span>
+          </div>
+        </div>
       <div class="mt-4 font-bold text-white mb-4">
         Project Description
       </div>
