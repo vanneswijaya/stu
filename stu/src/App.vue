@@ -1,9 +1,11 @@
 <script setup>
 import Footer from "./components/Footer.vue";
+import Header from "./partials/Header.vue";
 </script>
 
 <template>
   <div>
+    <Header />
     <div class="bg-dark">
       <router-view :key="$route.fullPath"> </router-view>
     </div>
