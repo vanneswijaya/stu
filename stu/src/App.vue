@@ -1,9 +1,13 @@
-<script setup></script>
+<script setup>
+import Footer from "./components/Footer.vue";
+</script>
 
 <template>
-  <div class="bg-dark">
-    <router-view :key="$route.fullPath">
-    </router-view>
+  <div>
+    <div class="bg-dark">
+      <router-view :key="$route.fullPath"> </router-view>
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
