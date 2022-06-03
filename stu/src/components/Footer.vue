@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="bg-dark w-screen h-24 sticky bottom-0">
+  <div class="bg-dark w-screen h-28 sticky bottom-0">
     <div
       class="bg-white/5 w-full h-full flex justify-between px-12 py-5 gap-5 items-center"
     >

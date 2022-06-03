@@ -9,7 +9,7 @@ import Header from "./partials/Header.vue";
     <div class="bg-dark">
       <router-view :key="$route.fullPath"> </router-view>
     </div>
-    <Footer></Footer>
+    <Footer/>
   </div>
 </template>
 
