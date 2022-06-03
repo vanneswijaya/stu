@@ -6,17 +6,23 @@
 
       <div class="text-lg mb-8">
         <p class="mb-2 text-tertiary">Current Exchange Rate</p>
+        <div class="text-white tracking-wide font-thin mb-2 text-sm">
+         The lowest exchange rate between banks
+        </div>
         <div class="flex">
           <div class="h-16 w-2/5 bg-white/5 rounded-l-lg flex justify-between items-center px-4">
             <div class="flex">
-              <span class="text-white text-lg mr-3">1 {{fromCurrency.name}}</span>
+              <span class="text-white text-lg mr-3">1 {{toCurrency.name}}</span>
             </div>
             <span class="text-white text-lg">=</span>
           </div>
           <div class="h-16 w-3/5 bg-white/5 rounded-r-lg text-lg">
             <input type="number" disabled v-model="currentRate" class="h-16 w-3/5 bg-white/5 text-white text-lg p-4 mr-2">
-            <span class="text-white text-lg ">{{toCurrency.name}}</span>
+            <span class="text-white text-lg ">{{fromCurrency.name}}</span>
           </div>
+        </div>
+        <div class="text-white tracking-wide font-thin mt-2 text-sm">
+          offered by Bank {{offerer}}
         </div>
       </div>
 
@@ -57,17 +63,23 @@
 
       <div class="text-lg mb-8">
         <p class="mb-2 text-primary">Targeted Exchange Rate</p>
+        <div class="text-white my-2 tracking-wide font-thin mt-2 text-sm">
+          Please input your targeted exchange rate
+        </div>
         <div class="flex">
           <div class="h-16 w-2/5 bg-white/5 rounded-l-lg flex justify-between items-center px-4">
             <div class="flex">
-              <span class="text-white text-lg mr-3">1 {{fromCurrency.name}}</span>
+              <span class="text-white text-lg mr-3">1 {{toCurrency.name}}</span>
             </div>
             <span class="text-white text-lg">=</span>
           </div>
           <div class="h-16 w-3/5 bg-white/5 rounded-r-lg text-lg">
-            <input type="number" v-model="targetRate" class="h-16 w-3/5 bg-white/5 text-white text-lg p-4 mr-2">
-            <span class="text-white text-lg">{{toCurrency.name}}</span>
+            <input type="number" v-model="targetRate" class="h-16 w-3/5 bg-primary/5 text-white text-lg p-4 mr-2">
+            <span class="text-white text-lg">{{fromCurrency.name}}</span>
           </div>
+        </div>
+        <div class="text-white tracking-wide font-thin mt-2 text-sm">
+          Targeted Rate Range : {{recommended}} - {{currentRate}}
         </div>
       </div>
 
@@ -99,8 +111,12 @@
         </div>
       </div>
 
+      <div class="text-white tracking-wider mt-6 mb-1.5 text-sm font-thin">
+        Period :  03/06/2022 - 23/06/2022
+      </div>
+
       <span class="text-white">
-        You will save 
+        You will potentially save 
       </span>
       <span class="text-green-500 font-bold">
         {{(amount - store.toCurrency.amount).toFixed(2)}} {{toCurrency.name}}
@@ -183,8 +199,10 @@ ChartJS.register(
 var fromCurrency = ref(store.fromCurrency)
 var toCurrency = ref(store.toCurrency)
 var currentRate = ref(store.rate)
-var targetRate = ref(0)
+var targetRate = ref(store.rate)
 var amount = ref(store.toCurrency.amount)
+var recommended = ref(store.recommended)
+var offerer = ref(store.offerer)
 var line = ref(null)
 
 watch(targetRate, (newAmount, oldAmount) => {
@@ -221,7 +239,7 @@ function convert() {
   .then(function (response) {
     console.log(JSON.stringify(response.data));
     router.push({
-      name: 'Home'
+      name: 'Completed'
     })
   })
   .catch(function (error) {

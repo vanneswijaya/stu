@@ -8,6 +8,7 @@ import PlannedExchange from "../components/PlannedExchange.vue";
 import Currency from "../components/Currency.vue";
 import Expense from "../components/Expense.vue";
 import Budgeting from "../components/Budgeting.vue";
+import Completed from "../components/Completed.vue";
 
 const routes = [
   {
@@ -17,6 +18,15 @@ const routes = [
     meta: {
       footer: false,
       onPage: "home",
+    },
+  },
+  {
+    path: "/completed",
+    name: "Completed",
+    component: Completed,
+    meta: {
+      footer: false,
+      onPage: "completed",
     },
   },
   {
@@ -97,13 +107,19 @@ const router = createRouter({
   mode: "history",
   history: createWebHistory(),
   routes,
-  //   scrollBehavior(to, from, savedPosition) {
-  //     return new Promise((resolve, reject) => {
-  //       setTimeout(() => {
-  //         resolve({ left: 0, top: 0, behavior: "smooth" });
-  //       }, 300);
-  //     });
-  //   },
+    scrollBehavior(to, from, savedPosition) {
+      return new Promise((resolve, reject) => {
+        if (to.path == '/completed') {
+          setTimeout(() => {
+            resolve({ left: 0, top: 0});
+          }, 0);
+        } else {
+          setTimeout(() => {
+            resolve({ left: 0, top: 0, behavior: "smooth"});
+          }, 0);
+        }
+      });
+    },
 });
 
 export default router;

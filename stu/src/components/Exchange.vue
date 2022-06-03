@@ -156,6 +156,8 @@ var bd = ref({
   });
 
 var rate = ref(0)
+var recommended = ref(0)
+var offerer = ref('')
 
 function hitFrom(to, fromAmount) {
   bd.value.to_cur = to;
@@ -174,6 +176,8 @@ function hitFrom(to, fromAmount) {
   .then(function (response) {
     toCurrencyAmount.value = response.data.to_amt.toFixed(0)
     rate.value = response.data.rate_per_hkd
+    recommended.value = response.data.recom_price
+    offerer.value = response.data.bank
     console.log(response.data);
   })  
   .catch(function (error) {
@@ -213,6 +217,8 @@ function convert() {
   store.toCurrency.flag = toCurrency.value.flag
   store.toCurrency.amount = toCurrencyAmount.value
   store.rate = rate.value
+  store.recommended = recommended.value
+  store.offerer = offerer.value
 
   router.push({
     name: 'instant-exchange'

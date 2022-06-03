@@ -56,12 +56,17 @@ ChartJS.register(
   SubTitle
 );
 
+var cValues = ref([])
+var cLabels = ref([])
+cValues.value = [5.774151530133701,5.7530817684312385,5.76544239766191,5.77905947365134,5.762625294210719,5.755027096480725,5.781878237890959,5.804666001451537,5.779695452994126,5.777380587554022,5.76389230399571,5.752723777121603,5.74136830103246,5.744742927721244,5.736929673569422,5.717232928276818,5.73450111330404,5.747613558999526,5.727620331537806,5.738017561688632,5.761193123338398,5.734151262789548,5.773417643250147,5.798124694206806,5.783868017740056,5.791095431822317,5.8139965154831685,5.8242241399338495,5.801901086706407,5.834287269126208,5.8262182460035765]
+cLabels.value = [23,24,25,26,27,28,29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
+
 const chartData = ref({
-  labels: ["1", "5", "10", "15", "20", "31"],
+  labels: cLabels.value,
   datasets: [
     {
       label: "Exchange rate in HKD",
-      data: [3, 5, 3, 10, 25, 23],
+      data: cValues.value,
       backgroundColor: "rgba(34, 197, 94, 0.2)",
       borderColor: "rgba(34, 197, 94, 1)",
       borderWidth: 2,
@@ -99,7 +104,7 @@ const chartData = ref({
       </div>
     </section>
     <section class="flex flex-col mt-5 gap-y-3">
-      <router-link to="/instant-exchange">
+      <router-link to="/exchange">
         <div class="flex justify-center rounded-3xl w-full h-16 bg-white/5 p-5">
           Buy Instant
         </div>

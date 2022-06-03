@@ -10,15 +10,12 @@
       <section class="mb-8">
         <Line :chart-data="chartData" />
       </section>
-<!-- 
-      <button @click="convert()" class="my-4 h-16 w-1/2 bg-secondary rounded-lg text-white text-lg">
-        <span>Convert {{fromCurrency.name}}</span>
-        <span> to </span>
-        <span>{{toCurrency.name}}</span>
-      </button> -->
 
-      <div class="text-lg mb-8">
-        <p class="mb-2 text-primary">Planned Exchange Rate</p>
+      <div class="text-lg mb-4">
+        <p class="mb-2 text-tertiary">Current Exchange Rate</p>
+        <div class="text-white tracking-wide font-thin mb-2 text-sm">
+         The lowest exchange rate between banks
+        </div>
         <div class="flex">
           <div class="h-16 w-2/5 bg-white/5 rounded-l-lg flex justify-between items-center px-4">
             <div class="flex">
@@ -27,15 +24,40 @@
             <span class="text-white text-lg">=</span>
           </div>
           <div class="h-16 w-3/5 bg-white/5 rounded-r-lg text-lg">
-            <input type="number" v-model="targetRate" class="h-16 w-3/5 bg-white/5 text-white text-lg p-4 mr-2">
+            <input type="number" v-model="currentRate" class="h-16 w-3/5 bg-tertiary/5 text-white text-lg p-4 mr-2">
             <span class="text-white text-lg">{{fromCurrency.name}}</span>
           </div>
+        </div>
+        <div class="text-white tracking-wide font-thin mt-2 text-sm">
+          offered by Bank {{'Beta'}}
+        </div>
+      </div>
+
+      <div class="text-lg mb-8">
+        <p class="mb-2 text-primary">Planned Exchange Rate</p>
+        <div class="text-white my-2 tracking-wide font-thin mt-2 text-sm">
+          Please input your targeted exchange rate
+        </div>
+        <div class="flex">
+          <div class="h-16 w-2/5 bg-white/5 rounded-l-lg flex justify-between items-center px-4">
+            <div class="flex">
+              <span class="text-white text-lg mr-3">1 {{toCurrency.name}}</span>
+            </div>
+            <span class="text-white text-lg">=</span>
+          </div>
+          <div class="h-16 w-3/5 bg-white/5 rounded-r-lg text-lg">
+            <input type="number" v-model="targetRate" class="h-16 w-3/5 bg-primary/5 text-white text-lg p-4 mr-2">
+            <span class="text-white text-lg">{{fromCurrency.name}}</span>
+          </div>
+        </div>
+        <div class="text-white tracking-wide font-thin mt-2 text-sm">
+          Recommended Rate Range : {{recommended}} - {{currentRate}}
         </div>
       </div>
 
       <div class="mb-4">
         <div id="fromCurrency" class="flex">
-          <input type="number" disabled v-model="store.fromCurrency.amount" class="h-16 w-3/5 bg-white/5 rounded-l-lg text-white text-lg p-4">
+          <input type="number" v-model="store.fromCurrency.amount" class="h-16 w-3/5 bg-white/5 rounded-l-lg text-white text-lg p-4">
           <div type="text" class="flex h-16 w-2/5 bg-white/5 rounded-r-lg text-white justify-center p-4">
             <div class="flex items-center">
               <img class="h-5 w-7 mr-2" :src="fromCurrency.flag" alt="">
@@ -104,15 +126,25 @@ import { Line } from "vue-chartjs";
 
 var fromCurrency = ref(store.fromCurrency)
 var toCurrency = ref(store.toCurrency)
-var targetRate = ref(0)
-var currentRate = ref(1.5)
+var currentRate = ref(5.777)
+var targetRate = ref(5.777)
+var recommended = ref(5.693)
 
 var amount = ref(0)
 
 watch(targetRate, (newAmount, oldAmount) => {
   console.log(targetRate)
-  amount.value = store.fromCurrency.amount * targetRate.value
+  amount.value = (store.fromCurrency.amount / targetRate.value).toFixed(2)
 })
+
+const router = useRouter()
+const route = useRoute()
+
+function convert() {
+  router.push({
+    'name': 'Completed'
+  })
+}
 
 import {
   Chart as ChartJS,

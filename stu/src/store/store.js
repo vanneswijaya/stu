@@ -11,7 +11,8 @@ export const store = reactive({
     'flag':'https://flagpedia.net/data/flags/w580/sg.png',
     'amount': 1500
   },
-  rate: 0
+  rate: 0,
+  recommended: 0,
 })
 
 
