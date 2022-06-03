@@ -51,11 +51,11 @@
             Planned
           </div>
         </router-link>
-        <router-link to="/converter">
+        <router-link to="/budgeting">
           <div
             class="flex justify-center pt-2 rounded-3xl mt-3 w-36 h-10 bg-white/5"
           >
-            Converter
+            Savings
           </div>
         </router-link>
       </div>
