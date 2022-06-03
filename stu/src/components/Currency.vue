@@ -90,7 +90,7 @@ const chartData = ref({
     <section>
       <div class="mt-5">
         <div class="font-light">Current exchange rate</div>
-        <div class="text-3xl font-medium">HKD $7.85</div>
+        <div class="text-3xl font-medium">HKD $5.82</div>
         <div class="text-2xl font-light text-green-500">+ 0.98%</div>
       </div>
     </section>

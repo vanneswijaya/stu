@@ -26,18 +26,18 @@
           <div class="font-light">2877-5542-4040-9891</div>
         </div>
       </section>
-      <section class="font-light flex flex-wrap justify-center w-full h-32 mt-10">
+      <section class="font-light flex flex-wrap justify-center w-full h-28 mt-10">
         <div>
           <router-link to="/exchange">
             <div
-              class="flex justify-center pt-2 rounded-3xl w-36 h-10 bg-white/5"
+              class="flex justify-center pt-2 rounded-xl w-36 h-10 bg-white/5"
             >
               Instant
             </div>
           </router-link>
           <router-link to="/lending">
             <div
-              class="flex justify-center pt-2 rounded-3xl mt-3 w-36 h-10 bg-white/5"
+              class="flex justify-center pt-2 rounded-xl mt-3 w-36 h-10 bg-white/5"
             >
               Lending
             </div>
@@ -47,21 +47,21 @@
         <div class="">
           <router-link to="/planned-exchange">
             <div
-              class="flex justify-center pt-2 rounded-3xl w-36 h-10 bg-white/5"
+              class="flex justify-center pt-2 rounded-xl w-36 h-10 bg-white/5"
             >
               Planned
             </div>
           </router-link>
           <router-link to="/budgeting">
             <div
-              class="flex justify-center pt-2 rounded-3xl mt-3 w-36 h-10 bg-white/5"
+              class="flex justify-center pt-2 rounded-xl mt-3 w-36 h-10 bg-white/5"
             >
               Savings
             </div>
           </router-link>
         </div>
       </section>
-      <section class="flex flex-col mt-3">
+      <section class="flex flex-col mt-2">
         <div class="text-xl font-light">My Currencies</div>
         <div class="flex flex-nowrap mt-3 gap-x-5 overflow-auto">
           <div class="relative rounded-3xl shrink-0 w-36 h-36 bg-white/5 p-5">
@@ -98,7 +98,7 @@
           </div>
         </div>
       </section>
-      <section class="flex flex-col mt-10">
+      <section class="flex flex-col mt-4">
         <div class="text-xl font-light">Top Currencies</div>
         <div class="flex flex-nowrap mt-3 gap-x-5 overflow-auto">
           <router-link to="/currency">
@@ -129,7 +129,7 @@
           </div>
         </div>
       </section>
-      <section class="flex flex-col mt-10">
+      <section class="flex flex-col mt-4">
         <div class="text-xl font-light">Gainers & Losers</div>
         <div class="flex flex-nowrap mt-3 gap-x-5 overflow-auto">
           <div class="relative rounded-3xl shrink-0 w-36 h-36 bg-white/5 p-5">
@@ -158,7 +158,7 @@
           </div>
         </div>
       </section>
-      <section class="flex flex-col mt-10">
+      <section class="flex flex-col mt-4">
         <div class="text-xl font-light">Trending News</div>
         <div class="flex flex-col mt-3 gap-x-5">
           <div

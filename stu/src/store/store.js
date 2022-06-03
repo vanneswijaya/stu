@@ -13,6 +13,7 @@ export const store = reactive({
   },
   rate: 0,
   recommended: 0,
+  offerer: '',
 })
 
 

@@ -1,4 +1,5 @@
 <script setup></script>
+
 <template class="">
   <div class="h-full w-screen bg-dark py-10 px-10">
     <div class="text-lg text-white font-bold mb-4">Planned Exchange</div>
@@ -55,6 +56,31 @@
         </div>
       </div>
 
+      <div class="text-white mb-12">
+        <p class="mb-4 text-white">Options</p>
+        <label for="default-toggle" class="relative inline-flex items-center mb-6 mx-1 cursor-pointer">
+          <input type="checkbox" v-model="recurring" id="default-toggle" class="sr-only peer">
+          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+          <span class="ml-2 text-md text-gray-900 dark:text-gray-300">Recurring</span>
+        </label>
+          
+        <div class="flex">
+          <div class="w-1/3">
+            <input type="number" v-model="check" class="bg-white/5 px-4 h-12 text-white text-lg">
+          </div>
+          <div class="w-2/3">
+            <select id="countries" class="bg-white/5 h-12 text-white text-sm rounded-r-lg w-full p-3">
+              <option class="text-black" selected>Date range</option>
+              <option class="text-black" value="US">days</option>
+              <option class="text-black" value="CA">weeks</option>
+              <option class="text-black" value="FR">months</option>
+            </select>
+          </div>
+        </div>
+
+        
+      </div>
+
       <div class="mb-4">
         <div id="fromCurrency" class="flex">
           <input type="number" v-model="store.fromCurrency.amount" class="h-16 w-3/5 bg-white/5 rounded-l-lg text-white text-lg p-4">
@@ -107,30 +133,14 @@ import { useRouter, useRoute } from 'vue-router'
 import { store } from '../store/store.js'
 import { Line } from "vue-chartjs";
 
-// onMounted(() => {
-//   fromCurrency.value = store.fromCurrency
-//   toCurrency.value = store.toCurrency
-// })
-
-// var toCurrency = ref({
-//     'name':'IDR',
-//     'flag':'https://flagpedia.net/data/flags/w580/id.png',
-//     'amount': 2000
-//   })
-
-// var fromCurrency = ref({
-//     'name':'HKD',
-//     'flag':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Hong_Kong.svg/640px-Flag_of_Hong_Kong.svg.png',
-//     'amount': 1000
-//   })
-
 var fromCurrency = ref(store.fromCurrency)
 var toCurrency = ref(store.toCurrency)
 var currentRate = ref(5.777)
 var targetRate = ref(5.777)
 var recommended = ref(5.693)
-
+var reccuring = ref(false)
 var amount = ref(0)
+var check = ref(0)
 
 watch(targetRate, (newAmount, oldAmount) => {
   console.log(targetRate)
@@ -219,7 +229,11 @@ const chartData = ref({
   ],
 });
 
-
+onMounted(() => {
+  let recaptchaScript = document.createElement('script')
+  recaptchaScript.setAttribute('src', 'https://unpkg.com/flowbite@1.4.7/dist/datepicker.js')
+  document.head.appendChild(recaptchaScript)
+})
 
 
 
