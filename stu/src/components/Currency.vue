@@ -99,12 +99,16 @@ const chartData = ref({
       </div>
     </section>
     <section class="flex flex-col mt-5 gap-y-3">
-      <div class="flex justify-center rounded-3xl w-full h-16 bg-white/5 p-5">
-        Buy Instant
-      </div>
-      <div class="flex justify-center rounded-3xl w-full h-16 bg-white/5 p-5">
-        Buy Planned
-      </div>
+      <router-link to="/instant-exchange">
+        <div class="flex justify-center rounded-3xl w-full h-16 bg-white/5 p-5">
+          Buy Instant
+        </div>
+      </router-link>
+      <router-link to="/planned-exchange">
+        <div class="flex justify-center rounded-3xl w-full h-16 bg-white/5 p-5">
+          Buy Planned
+        </div>
+      </router-link>
     </section>
   </div>
 </template>

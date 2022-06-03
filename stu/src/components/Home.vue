@@ -11,11 +11,13 @@
     <section
       class="relative flex flex-col rounded-3xl bg-gradient-to-br from-primary to-secondary mt-10 h-48 w-full"
     >
-      <div class="ml-5 mt-5">
-        <div class="font-light">Balance</div>
-        <div class="text-3xl font-medium">23,199 HKD</div>
-        <div class="font-light uppercase mt-3">Richard Ponto</div>
-      </div>
+      <router-link to="/expense">
+        <div class="ml-5 mt-5">
+          <div class="font-light">Balance</div>
+          <div class="text-3xl font-medium">23,199 HKD</div>
+          <div class="font-light uppercase mt-3">Richard Ponto</div>
+        </div>
+      </router-link>
       <div class="absolute top-0 right-2 h-24 w-24">
         <img src="../assets/logo.png" alt="" />
       </div>
@@ -25,25 +27,37 @@
     </section>
     <section class="font-light flex flex-wrap justify-center w-full h-32 mt-10">
       <div>
-        <div class="flex justify-center pt-2 rounded-3xl w-36 h-10 bg-white/5">
-          Instant
-        </div>
-        <div
-          class="flex justify-center pt-2 rounded-3xl mt-3 w-36 h-10 bg-white/5"
-        >
-          Lending
-        </div>
+        <router-link to="/instant-exchange">
+          <div
+            class="flex justify-center pt-2 rounded-3xl w-36 h-10 bg-white/5"
+          >
+            Instant
+          </div>
+        </router-link>
+        <router-link to="/lending">
+          <div
+            class="flex justify-center pt-2 rounded-3xl mt-3 w-36 h-10 bg-white/5"
+          >
+            Lending
+          </div>
+        </router-link>
       </div>
       <div class="w-3"></div>
       <div class="">
-        <div class="flex justify-center pt-2 rounded-3xl w-36 h-10 bg-white/5">
-          Planned
-        </div>
-        <div
-          class="flex justify-center pt-2 rounded-3xl mt-3 w-36 h-10 bg-white/5"
-        >
-          Converter
-        </div>
+        <router-link to="/planned-exchange">
+          <div
+            class="flex justify-center pt-2 rounded-3xl w-36 h-10 bg-white/5"
+          >
+            Planned
+          </div>
+        </router-link>
+        <router-link to="/exchange">
+          <div
+            class="flex justify-center pt-2 rounded-3xl mt-3 w-36 h-10 bg-white/5"
+          >
+            Converter
+          </div>
+        </router-link>
       </div>
     </section>
     <section class="flex flex-col mt-3">
@@ -86,14 +100,16 @@
     <section class="flex flex-col mt-10">
       <div class="text-xl font-light">Top Currencies</div>
       <div class="flex flex-nowrap mt-3 gap-x-5 overflow-auto">
-        <div class="relative rounded-3xl shrink-0 w-36 h-36 bg-white/5 p-5">
-          <div class="text-2xl font-light">USD</div>
-          <div class="absolute top-6 right-5 w-10 h-10">
-            <img src="../assets/us.png" alt="" />
+        <router-link to="/currency">
+          <div class="relative rounded-3xl shrink-0 w-36 h-36 bg-white/5 p-5">
+            <div class="text-2xl font-light">USD</div>
+            <div class="absolute top-6 right-5 w-10 h-10">
+              <img src="../assets/us.png" alt="" />
+            </div>
+            <div class="text-lg font-thin mt-3">HKD $2,703</div>
+            <div class="text-2xl font-light text-green-500">+ 0.98%</div>
           </div>
-          <div class="text-lg font-thin mt-3">HKD $2,703</div>
-          <div class="text-2xl font-light text-green-500">+ 0.98%</div>
-        </div>
+        </router-link>
         <div class="relative rounded-3xl shrink-0 w-36 h-36 bg-white/5 p-5">
           <div class="text-2xl font-light">SGD</div>
           <div class="absolute top-6 right-5 w-10 h-10">
