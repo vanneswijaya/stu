@@ -1,6 +1,6 @@
 <template>
     <div
-    class="flex flex-col h-screen w-screen bg-dark text-white px-10 py-10 overflow-auto"
+    class="flex flex-col h-screen w-screen bg-dark text-white px-10 py-8 overflow-auto"
     >
     <section>
         <div class="text-2xl font-medium">Budgeting & Savings</div>

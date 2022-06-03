@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+import Header from './partials/Header.vue'
+
+</script>
 
 <template>
   <div class="bg-dark">
+    <Header />
     <router-view :key="$route.fullPath">
     </router-view>
   </div>
