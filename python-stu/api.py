@@ -1,20 +1,23 @@
 from fastapi import Request, Response, FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from master import Convert
 
 app = FastAPI()
 
-from_app_dummy_data = {"from_cur":"HKD",
-                            "from_amt":1000,
-                            "to_cur":"SGD",
-                            "to_amt":0,}
-                        
+origins = [
+    "http://localhost:3000",
+]
 
-# @app.post("/convert") #bs tmbahin user_id klo mau 
-# async def instant(transaction: Transaction):
-#     convert_dict = transaction.dict()
-#     return convert_dict
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.post("/instant") #bs tmbahin user_id klo mau 
 async def instant(request: Request):

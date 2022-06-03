@@ -15,7 +15,7 @@
           </div>
           <div class="h-16 w-3/5 bg-white/5 rounded-r-lg text-lg">
             <input type="number" disabled v-model="currentRate" class="h-16 w-3/5 bg-white/5 text-white text-lg p-4 mr-2">
-            <span class="text-white text-lg ">{{fromCurrency.name}}</span>
+            <span class="text-white text-lg ">{{toCurrency.name}}</span>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
         <div class="flex">
           <div class="h-16 w-2/5 bg-white/5 rounded-l-lg flex justify-between items-center px-4">
             <div class="flex">
-              <span class="text-white text-lg mr-3">1 {{toCurrency.name}}</span>
+              <span class="text-white text-lg mr-3">1 {{fromCurrency.name}}</span>
             </div>
             <span class="text-white text-lg">=</span>
           </div>
@@ -103,7 +103,7 @@
         You will save 
       </span>
       <span class="text-green-500 font-bold">
-        {{store.toCurrency.amount - amount}} IDR
+        {{(amount - store.toCurrency.amount).toFixed(2)}} {{toCurrency.name}}
       </span>
       
       <button @click="convert()" class="mt-4 h-16 w-full bg-secondary rounded-lg text-white text-lg">
@@ -122,6 +122,8 @@ import { ref, reactive, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { store } from '../store/store.js'
 import { Line } from "vue-chartjs";
+import axios from "axios";
+
 import {
   Chart as ChartJS,
   ArcElement,
@@ -180,14 +182,14 @@ ChartJS.register(
 
 var fromCurrency = ref(store.fromCurrency)
 var toCurrency = ref(store.toCurrency)
+var currentRate = ref(store.rate)
 var targetRate = ref(0)
-var currentRate = ref(1.5)
-var amount = ref(0)
+var amount = ref(store.toCurrency.amount)
 var line = ref(null)
 
 watch(targetRate, (newAmount, oldAmount) => {
   console.log(targetRate)
-  amount.value = store.fromCurrency.amount * targetRate.value
+  amount.value = (store.fromCurrency.amount / targetRate.value).toFixed(2)
 })
 
 var cValues = ref([])
@@ -195,6 +197,38 @@ var cLabels = ref([])
 cValues.value = [5.774151530133701,5.7530817684312385,5.76544239766191,5.77905947365134,5.762625294210719,5.755027096480725,5.781878237890959,5.804666001451537,5.779695452994126,5.777380587554022,5.76389230399571,5.752723777121603,5.74136830103246,5.744742927721244,5.736929673569422,5.717232928276818,5.73450111330404,5.747613558999526,5.727620331537806,5.738017561688632,5.761193123338398,5.734151262789548,5.773417643250147,5.798124694206806,5.783868017740056,5.791095431822317,5.8139965154831685,5.8242241399338495,5.801901086706407,5.834287269126208,5.8262182460035765]
 cLabels.value = [23,24,25,26,27,28,29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
 
+const router = useRouter()
+const route = useRoute()
+
+function convert() {
+  var data = JSON.stringify({
+    "to_cur": "SGD",
+    "to_amt": 0,
+    "from_amt": 10000,
+    "input_tp": 5.74
+  });
+
+  var config = {
+    method: 'post',
+    url: 'http://localhost:8000/cashback',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    router.push({
+      name: 'Home'
+    })
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+}
 
 var chartData = ref({
   labels: cLabels,

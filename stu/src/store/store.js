@@ -7,10 +7,11 @@ export const store = reactive({
     'amount': 1000
   },
   toCurrency: {
-    'name':'IDR',
+    'name':'SGD',
     'flag':'https://flagpedia.net/data/flags/w580/id.png',
     'amount': 1500
-  }
+  },
+  rate: 0
 })
 
 

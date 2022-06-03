@@ -42,6 +42,7 @@
         <span>{{toCurrency.name}}</span>
       </button>
     </div>
+
     <div>
       <vue-final-modal v-model="fromCurrency.modal">
         <div class="py-32 px-8">
@@ -55,7 +56,7 @@
               <hr class="mb-4">
             </div>
             <div class="h-96 overflow-auto">
-              <div v-for="currency in filteredListCurrencies" :key="currency.name" id="currency-card" @click="fromCurrencyChange(currency), fromCurrency.modal = false" class="cursor-pointer flex bg-white/10 h-16 rounded-lg items-center px-6 mb-4">
+              <div v-for="currency in listCurrencies" :key="currency.name" id="currency-card" @click="fromCurrencyChange(currency), fromCurrency.modal = false" class="cursor-pointer flex bg-white/10 h-16 rounded-lg items-center px-6 mb-4">
                 <img class="h-5 w-7 mr-4" :src="currency.flag" alt="">
                 <span class="text-white text-lg">{{currency.name}}</span>
               </div>
@@ -83,7 +84,7 @@
               <hr class="mb-4">
             </div>
             <div class="h-96 overflow-auto">
-              <div v-for="currency in filteredListCurrencies" :key="currency.name" id="currency-card" @click="toCurrencyChange(currency), toCurrency.modal = false" class="cursor-pointer flex bg-white/10 h-16 rounded-lg items-center px-6 mb-4">
+              <div v-for="currency in listCurrencies" :key="currency.name" id="currency-card" @click="toCurrencyChange(currency), toCurrency.modal = false" class="cursor-pointer flex bg-white/10 h-16 rounded-lg items-center px-6 mb-4">
                 <img class="h-5 w-7 mr-4" :src="currency.flag" alt="">
                 <span class="text-white text-lg">{{currency.name}}</span>
               </div>
@@ -105,6 +106,7 @@ import { VueFinalModal, ModalsContainer } from 'vue-final-modal'
 import { ref, reactive, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { store } from '../store/store.js'
+import axios from 'axios'
 
 var listCurrencies = ref([
   {
@@ -112,76 +114,17 @@ var listCurrencies = ref([
     'flag':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Hong_Kong.svg/640px-Flag_of_Hong_Kong.svg.png'
   },
   {
-    'name':'IDR',
-    'flag':'https://flagpedia.net/data/flags/w580/id.png'
+    'name':'SGD',
+    'flag':'https://flagpedia.net/data/flags/h80/sg.webp'
   },
   {
     'name':'USD',
     'flag':'https://flagpedia.net/data/flags/w702/us.webp'
   },
   {
-    'name':'SGD',
-    'flag':'https://flagpedia.net/data/flags/h80/sg.webp'
+    'name':'EUR',
+    'flag':'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png'
   },
-  {
-    'name':'MYR',
-    'flag':'https://flagpedia.net/data/flags/w580/my.png'
-  },
-  {
-    'name':'PHP',
-    'flag':'https://flagpedia.net/data/flags/h80/ph.webp'
-  },
-  {
-    'name':'THB',
-    'flag':'https://flagpedia.net/data/flags/h80/th.webp'
-  },
-  {
-    'name':'AUD',
-    'flag':'https://flagpedia.net/data/flags/h80/au.webp'
-  },
-  {
-    'name':'CAD',
-    'flag':'https://flagpedia.net/data/flags/h80/ca.webp'
-  }
-])
-
-var filteredListCurrencies = ref([
-  {
-    'name':'HKD',
-    'flag':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Hong_Kong.svg/640px-Flag_of_Hong_Kong.svg.png'
-  },
-  {
-    'name':'IDR',
-    'flag':'https://flagpedia.net/data/flags/w580/id.png'
-  },
-  {
-    'name':'USD',
-    'flag':'https://flagpedia.net/data/flags/w702/us.webp'
-  },
-  {
-    'name':'SGD',
-    'flag':'https://flagpedia.net/data/flags/h80/sg.webp'
-  },
-  {
-    'name':'MYR',
-    'flag':'https://flagpedia.net/data/flags/w580/my.png'
-  },
-  {
-    'name':'PHP',
-    'flag':'https://flagpedia.net/data/flags/h80/ph.webp'
-  },
-  {
-    'name':'THB',
-    'flag':'https://flagpedia.net/data/flags/h80/th.webp'
-  },
-  {
-    'name':'AUD',
-    'flag':'https://flagpedia.net/data/flags/h80/au.webp'
-  },
-  {
-    'name':'CAD',
-    'flag':'https://flagpedia.net/data/flags/h80/ca.webp'
-  }
 ])
 
 var fromCurrency = ref({
@@ -192,7 +135,7 @@ var fromCurrency = ref({
 
   })
 var toCurrency = ref({
-    'name':'IDR',
+    'name':'SGD',
     'flag':'https://flagpedia.net/data/flags/w580/id.png',
     'modal': false,
     'change': true
@@ -206,7 +149,38 @@ var searchCurrency = ref("")
 const router = useRouter()
 const route = useRoute()
 
-var rate = ref(1.5)
+var bd = ref({
+    'to_cur': "",
+    'to_amt': 0,
+    'from_amt': 0,
+  });
+
+var rate = ref(0)
+
+function hitFrom(to, fromAmount) {
+  bd.value.to_cur = to;
+  bd.value.from_amt = fromAmount;
+  var body = JSON.stringify(bd.value)
+  var config = ref({
+    method: 'post',
+    url: 'http://localhost:8000/instant',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    data : body
+  });
+  axios(config.value)
+  .then(function (response) {
+    toCurrencyAmount.value = response.data.to_amt.toFixed(0)
+    rate.value = response.data.rate_per_hkd
+    console.log(response.data);
+  })  
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 
 function fromCurrencyChange(i){
   console.log(i)
@@ -218,6 +192,10 @@ function toCurrencyChange(i){
   toCurrency.value = i;
 }
 
+watch(fromCurrencyAmount, function(newValue, oldValue) {
+  hitFrom(toCurrency.value.name, newValue)
+})
+
 function filteredCurrencies(i){
   console.log(i)
   filteredListCurrencies = listCurrencies.value.filter(currency => currency.name.toLowerCase().includes(i.toLowerCase()))
@@ -227,31 +205,18 @@ watch(searchCurrency, (newSearch) => {
   filteredCurrencies(newSearch)
 })
 
-watch(fromCurrencyAmount, (newAmount, oldAmount) => {
-  toCurrencyAmount.value = newAmount * rate.value
-  fromCurrency.change = false
-})
-
-// watch(toCurrencyAmount, (newAmount, oldAmount) => {
-//   if (fromCurrency.change == true){
-//     fromCurrencyAmount.value = newAmount * rate.value
-//   }
-// })
-
 function convert() {
   store.fromCurrency.name = fromCurrency.value.name
   store.fromCurrency.flag = fromCurrency.value.flag
-  store.fromCurrency.amount = fromCurrencyAmount
+  store.fromCurrency.amount = fromCurrencyAmount.value
   store.toCurrency.name = toCurrency.value.name
   store.toCurrency.flag = toCurrency.value.flag
-  store.toCurrency.amount = toCurrencyAmount
+  store.toCurrency.amount = toCurrencyAmount.value
+  store.rate = rate.value
 
   router.push({
     name: 'instant-exchange'
   })
 }
-
-
-
 
 </script>
