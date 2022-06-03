@@ -28,7 +28,7 @@
           </div>
           <div class="h-16 w-3/5 bg-white/5 rounded-r-lg text-lg">
             <input type="number" v-model="targetRate" class="h-16 w-3/5 bg-white/5 text-white text-lg p-4 mr-2">
-            <span class="text-white text-lg">{{toCurrency.name}}</span>
+            <span class="text-white text-lg">{{fromCurrency.name}}</span>
           </div>
         </div>
       </div>
